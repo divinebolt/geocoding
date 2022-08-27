@@ -4,6 +4,14 @@ class DishesController < ApplicationController
   # GET /dishes or /dishes.json
   def index
     @dishes = Dish.all
+
+    # the `geocoded` scope filters only flats with coordinates (latitude & longitude)
+    @markers = @dishes.geocoded.map do |dish|
+    {
+      lat: dish.latitude,
+      lng: dish.longitude
+    }
+    end
   end
 
   # GET /dishes/1 or /dishes/1.json
