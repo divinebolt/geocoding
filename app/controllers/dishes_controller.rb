@@ -9,7 +9,9 @@ class DishesController < ApplicationController
     @markers = @dishes.geocoded.map do |dish|
     {
       lat: dish.latitude,
-      lng: dish.longitude
+      lng: dish.longitude,
+      info_window: render_to_string(partial: "info_window", locals: { dish: dish }),
+      image_url: helpers.asset_url("green_marker")
     }
     end
   end
